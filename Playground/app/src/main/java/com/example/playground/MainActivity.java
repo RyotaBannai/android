@@ -3,8 +3,9 @@ package com.example.playground;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-//import androidx.appcompat.app.AppCompatActivity;
-import androidx.activity.ComponentActivity;
+// import androidx.appcompat.app.AppCompatActivity;
+// import androidx.activity.ComponentActivity;
+import android.app.Activity;
 
 import android.widget.LinearLayout;
 
@@ -16,7 +17,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 
 
-public class MainActivity extends ComponentActivity {
+
+public class MainActivity extends Activity {
     private final int WRAP_CONTENT = LayoutParams.WRAP_CONTENT; //
     private final int MATCH_PARENT = LayoutParams.MATCH_PARENT; //
 
