@@ -41,6 +41,7 @@ public class EditActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete operation
+                                dialog.cancel();
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)
