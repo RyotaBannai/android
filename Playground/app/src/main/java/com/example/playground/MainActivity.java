@@ -2,20 +2,18 @@ package com.example.playground;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+// import androidx.annotation.Nullable;
 // import androidx.appcompat.app.AppCompatActivity;
 // import androidx.activity.ComponentActivity;
 import android.app.Activity;
 
 import android.widget.LinearLayout;
 
-import android.os.Bundle;
 import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Gravity;
 import android.graphics.Color;
 import android.graphics.Typeface;
-
 
 
 public class MainActivity extends Activity {
@@ -39,7 +37,7 @@ public class MainActivity extends Activity {
         tv.setTextSize(20.0f);
         tv.setTypeface(Typeface.MONOSPACE);
 
-        setContentView(linearLayout);
+
         TextView tv2 = new TextView(this);
         tv2.setText("Color RGB[127, 127, 0]");
         tv2.setTextColor(Color.rgb(127, 127, 0));
@@ -49,5 +47,11 @@ public class MainActivity extends Activity {
         tv2.setGravity(Gravity.CENTER); // centering both in vertically and horizontally.
         linearLayout.addView(tv, new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)); // width, height
         linearLayout.addView(tv2, new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)); // WRAP_CONTENT は 自動調整はしないで最低限表示に必要なスペースを確保する
+
+        setContentView(linearLayout);
+
+        // create from xml layout
+        // setContentView(R.layout.layout_main);
+        // setContentView(findViewById(R.id.hellotext));
     }
 }
