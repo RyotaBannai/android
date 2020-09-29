@@ -5,3 +5,4 @@
 - [Toast](https://developer.android.com/guide/topics/ui/notifiers/toasts)
 - [add aar package](https://stackoverflow.com/questions/16682847/how-to-manually-include-external-aar-package-using-new-gradle-android-build-syst)
 - [Google Map api v3 on Android](https://developers.google.com/maps/documentation/android-sdk/start#None-java)
+- [状態の保存に関して](https://developer.android.com/topic/libraries/architecture/saving-states)
