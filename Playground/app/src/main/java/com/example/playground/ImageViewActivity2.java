@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 /**
- *  Simpler way to display image file
- * */
+ * Simpler way to display image file
+ */
 public class ImageViewActivity2 extends Activity {
     private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
 
