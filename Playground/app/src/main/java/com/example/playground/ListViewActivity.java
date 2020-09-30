@@ -1,4 +1,5 @@
 package com.example.playground;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -8,7 +9,7 @@ import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
-public class ListViewActivity extends  Activity{
+public class ListViewActivity extends Activity {
     private final int MP = ViewGroup.LayoutParams.MATCH_PARENT;
     private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -35,7 +36,8 @@ public class ListViewActivity extends  Activity{
 
 
     }
-    private LinearLayout.LayoutParams createParam(int w, int h){
+
+    private LinearLayout.LayoutParams createParam(int w, int h) {
         return new LinearLayout.LayoutParams(w, h);
     }
 }
