@@ -6,3 +6,4 @@
 - [add aar package](https://stackoverflow.com/questions/16682847/how-to-manually-include-external-aar-package-using-new-gradle-android-build-syst)
 - [Google Map api v3 on Android](https://developers.google.com/maps/documentation/android-sdk/start#None-java)
 - [状態の保存に関して](https://developer.android.com/topic/libraries/architecture/saving-states)
+- AdapterView -> ListView class. AdapterView class は アダプターを使って別に用意されたデータを小要素として持つ View. 例えばリストは、リストに表示される個々のデータが小要素となり、個々のデータはアダプターを使ってリストに割り当てられる.
