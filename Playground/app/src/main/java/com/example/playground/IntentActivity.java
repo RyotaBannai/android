@@ -32,6 +32,7 @@ public class IntentActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // ref: https://qiita.com/kskso9/items/01c8bbb39355af9ec25e
         System.out.println("returned");
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
