@@ -8,11 +8,19 @@
 - [状態の保存に関して](https://developer.android.com/topic/libraries/architecture/saving-states)
 - AdapterView -> ListView class. AdapterView class は アダプターを使って別に用意されたデータを小要素として持つ View. 例えばリストは、リストに表示される個々のデータが小要素となり、個々のデータはアダプターを使ってリストに割り当てられる.
 - inflate 方法 [ref](https://akira-watson.com/android/inflate.html)
-```android
+```java
 getLayoutInflator().inflate(R.layout.inflate_layout, root);
 // Or
 Context context = getApplicationContext();
 LayoutInflater inflater = LayoutInflater.from(context);
 // Or LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 inflaterinflate(R.layout.inflate_layout, root)
+```
+- intent で「上方向へのナビゲーションを追加する」つまりヘッダーに戻るボタンを自動的に設置する [ref](https://developer.android.com/training/basics/firstapp/starting-activity#Up)
+```xml
+<activity android:name=".DisplayMessageActivity"
+          android:parentActivityName=".MainActivity">
+    <meta-data android:name="android.support.PARENT_ACTIVITY"
+               android:value=".MainActivity" />
+</activity>
 ```
