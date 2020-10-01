@@ -28,7 +28,7 @@ android {
                     'src/main/res/layout/intent',
                     'src/main/res/layout/infrator',
                     'src/main/res/layout',
-                    'src/main/res',
+                    'src/main/res', 'src/main/res/layout/fragment',
             ]
         }
     }
