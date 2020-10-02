@@ -14,13 +14,19 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.playground.R;
 
 public class FragmentActivity extends AppCompatActivity {
+    private FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main_activity);
 
-        final FragmentManager fragmentManager = getSupportFragmentManager(); // only supported by AppCompactActivity
-        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // have to be final to access from inner class
+        fragmentManager = getSupportFragmentManager(); // only supported by AppCompactActivity
+
+        // Default fragment
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // have to be final to access from inner class
+        fragmentTransaction.replace(R.id.container, new Fragment1());
+        fragmentTransaction.commit();
 
         /*
          * Button for fragment1
@@ -28,6 +34,7 @@ public class FragmentActivity extends AppCompatActivity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // have to be final to access from inner class
                 fragmentTransaction.replace(R.id.container, new Fragment1());
                 fragmentTransaction.commit();
             }
@@ -39,6 +46,7 @@ public class FragmentActivity extends AppCompatActivity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container, new Fragment2());
                 fragmentTransaction.commit();
             }

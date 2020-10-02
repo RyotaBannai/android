@@ -19,6 +19,6 @@ public class Fragment2 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment1, container, false);
+        return inflater.inflate(R.layout.fragment2, container, false);
     }
 }
