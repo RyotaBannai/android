@@ -5,4 +5,6 @@
     <string name="text">Text: This is awesome daredevil drawing!!</string>
     <string name="contents">Marvel Daredevil, or simply Daredevil, is an American web television series created for Netflix by Drew Goddard, based on the Marvel Comics character of the same name.</string>
     <string name="hello_fragment">Hello Fragment</string>
+    <string name="fragment1">Fragment1</string>
+    <string name="fragment2">Fragment2</string>
 </resources>

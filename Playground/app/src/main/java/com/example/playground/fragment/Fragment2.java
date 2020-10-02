@@ -10,26 +10,15 @@ import androidx.annotation.NonNull;
 
 import com.example.playground.R;
 
-public class Fragment1 extends Fragment {
+public class Fragment2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        /*
-        * システムが Fragment を作成したとき
-        * */
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        /*
-        * Fragment の UI が描画されるタイミングで呼び出される
-        * */
         super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment1, container, false);
     }
-
-    // onPause()
-    /*
-    * Fragmentが停止するときによばれる。Fragmentで変更されたステータスの保存はここで行う。
-    * */
 }
