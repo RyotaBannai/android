@@ -112,8 +112,11 @@ public class FragmentActivity extends AppCompatActivity {
                 if (((Fragment1) fragment).allowBackPressed()) { // and then you define a method allowBackPressed with the logic to allow back pressed or not
                     super.onBackPressed();
                 }
+                break;
             case ("Fragment2"):
+                break;
             case ("Fragment3"):
+                break;
         }
     }
 }
