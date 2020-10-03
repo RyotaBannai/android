@@ -33,11 +33,24 @@ public class ItemFragment extends ListFragment {
 //                RandomDataList.listData);
 
         /*
-         * Render reletive_item_fragment
+         * Render relative_item_fragment
+         * */
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+//                getActivity(),
+//                R.layout.relative_item_fragment,
+//                R.id.textView1);
+//
+//        arrayAdapter.add("Daredevil1");
+//        arrayAdapter.add("Daredevil2");
+//
+//        setListAdapter(arrayAdapter);
+
+        /*
+         * Render constraint_item_fragment
          * */
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 getActivity(),
-                R.layout.relative_item_fragment,
+                R.layout.constraint_item_fragment,
                 R.id.textView1);
 
         arrayAdapter.add("Daredevil1");
