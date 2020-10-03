@@ -25,14 +25,14 @@ android {
         main {
             assets.srcDirs = ['src/main/assets']
             res.srcDirs = [
-                    'src/main/res/layout/intent',
-                    'src/main/res/layout/infrator',
-                    'src/main/res/layout',
-                    'src/main/res', 'src/main/res/layout/fragment',
+                    'src/main/res/layout/fragment/',
+                    'src/main/res/layout/intent/',
+                    'src/main/res/layout/infrator/',
+                    'src/main/res/',
+                    'src/main/res/layout/default',
             ]
         }
     }
-
 }
 
 dependencies {
