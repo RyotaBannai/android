@@ -83,6 +83,10 @@ public class Fragment1 extends Fragment {
         view.setBackgroundColor(mBackgroundColor);
     }
 
+    public static boolean allowBackPressed(){
+        return true;
+    }
+
     // onPause()
     /*
      * Fragmentが停止するときによばれる。Fragmentで変更されたステータスの保存はここで行う。

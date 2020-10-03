@@ -68,18 +68,11 @@ public class FragmentActivity extends AppCompatActivity {
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 String fragmentClassName = Iterables.getLast(Arrays.asList(container.getName().split("\\.", 0)));
-                 /*
-                 * Want to check if fragment allows back operation.
-                 * */
-//                 switch(fragmentClassName){
-//                     case("Fragment1"):
-//                     case("Fragment2"):
-//                     case("Fragment3"):
-//                 }
+                onBackPressed();
             }
         });
     }
+
 
     protected void renderFragment1() {
         container = Fragment1.class;
@@ -107,10 +100,20 @@ public class FragmentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        final Myfragment fragment = (Myfragment) getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
+        String fragmentClassName = Iterables.getLast(Arrays.asList(container.getName().split("\\.", 0)));
+        final Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentClassName);
 
-//        if (fragment.allowBackPressed()) { // and then you define a method allowBackPressed with the logic to allow back pressed or not
-        super.onBackPressed();
-//        }
+        /*
+         * Want to check if fragment allows back operation.
+         * Press button to back previous fragment (only when current fragment == fragment1 below implementation)
+         * */
+        switch (fragmentClassName) {
+            case ("Fragment1"):
+                if (((Fragment1) fragment).allowBackPressed()) { // and then you define a method allowBackPressed with the logic to allow back pressed or not
+                    super.onBackPressed();
+                }
+            case ("Fragment2"):
+            case ("Fragment3"):
+        }
     }
 }
