@@ -8,4 +8,6 @@
     <string name="fragment1">Fragment1</string>
     <string name="fragment2">Fragment2</string>
     <string name="fragment3">Fragment3</string>
+    <string name="reminder">Your name</string>
+    <string name="done">Done</string>
 </resources>

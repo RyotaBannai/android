@@ -17,18 +17,32 @@ public class ItemFragment extends ListFragment {
     @Override
     public void setListAdapter(ListAdapter adapter) {
         super.setListAdapter(adapter);
-
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        /*
+        * Render item_fragment
+        * */
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+//                getActivity(),
+//                R.layout.item_fragment,
+//                R.id.textview,
+//                RandomDataList.listData);
+
+        /*
+         * Render reletive_item_fragment
+         * */
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 getActivity(),
-                R.layout.item_fragment,
-                R.id.textview,
-                RandomDataList.listData);
+                R.layout.relative_item_fragment,
+                R.id.textView1);
+
+        arrayAdapter.add("Daredevil1");
+        arrayAdapter.add("Daredevil2");
+
         setListAdapter(arrayAdapter);
     }
 }

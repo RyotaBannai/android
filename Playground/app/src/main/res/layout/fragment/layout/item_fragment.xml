@@ -7,14 +7,17 @@
 
     <TextView
         android:id="@+id/textview"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/check"
-        android:layout_width="wrap_content"
+        android:layout_width="0px"
         android:layout_height="match_parent"
-        android:text="Check the details > "
-        android:paddingHorizontal="5dp"/>
+        android:layout_weight="2"
+        android:gravity="end"
+        android:paddingHorizontal="5dp"
+        android:text="Check the details > " />
 </LinearLayout>
