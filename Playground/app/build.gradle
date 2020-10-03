@@ -46,6 +46,7 @@ dependencies {
     implementation 'androidx.wear:wear:1.0.0'
     implementation 'com.vanniktech:onactivityresult:0.7.0'
     annotationProcessor 'com.vanniktech:onactivityresult-compiler:0.7.0'
+    implementation "com.google.guava:guava:29.0-android"
 
     // test
     testImplementation 'junit:junit:4.12'

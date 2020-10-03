@@ -39,7 +39,7 @@ public class Fragment1 extends Fragment {
     * fragment に引数を渡せるようにする
     * */
     @CheckResult // このアノテーションをつけたメソッドの戻り値（ここではこのクラスのインスタンス）を使用することを強制する
-    public static Fragment1 createInstance(String name, @ColorInt int color) { // リソースIDなのか色のInt値なのか区別を付けるため
+    public static Fragment1 createInstance(String name, @ColorInt int color) { // リソース ID なのか色の Int 値なのか区別を付けるため
         Fragment1 fragment = new Fragment1();
         Bundle bundle = new Bundle();
         bundle.putString(KEY_NAME, name);
