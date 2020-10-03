@@ -4,6 +4,7 @@ package com.example.playground.fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -24,9 +25,10 @@ public class FragmentActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager(); // only supported by AppCompactActivity
 
         // Default fragment
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // have to be final to access from inner class
-        fragmentTransaction.replace(R.id.container, new Fragment1());
-        fragmentTransaction.commit();
+        // 画面が「はじめて」作成された時ににだけ Fragment を追加
+        if (savedInstanceState == null) {
+            renderFragment1();
+        }
 
         /*
          * Button for fragment1
@@ -34,9 +36,7 @@ public class FragmentActivity extends AppCompatActivity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // have to be final to access from inner class
-                fragmentTransaction.replace(R.id.container, new Fragment1());
-                fragmentTransaction.commit();
+                renderFragment1();
             }
         });
 
@@ -46,10 +46,20 @@ public class FragmentActivity extends AppCompatActivity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, new Fragment2());
-                fragmentTransaction.commit();
+                renderFragment2();
             }
         });
+    }
+
+    protected void renderFragment1() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // have to be final to access from inner class
+        fragmentTransaction.replace(R.id.container, Fragment1.createInstance("This is Fragment1", Color.LTGRAY));
+        fragmentTransaction.commit();
+    }
+
+    protected void renderFragment2() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, new Fragment2());
+        fragmentTransaction.commit();
     }
 }

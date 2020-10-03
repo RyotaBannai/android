@@ -24,3 +24,4 @@ inflaterinflate(R.layout.inflate_layout, root)
                android:value=".MainActivity" />
 </activity>
 ```
+- [Fragment passing arguments](https://qiita.com/Reyurnible/items/dffd70144da213e1208b)
