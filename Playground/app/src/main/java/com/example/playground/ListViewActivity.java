@@ -29,11 +29,11 @@ public class ListViewActivity extends Activity {
          * ArrayAdapter:
          * 2: TextView などデータを表示するために使用する view の Resource id
          * 3: ListView で表示したいデータリスト
+         *
          * */
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.rowdata, data);
         list.setAdapter(arrayAdapter);
-
 
     }
 
