@@ -1,13 +1,13 @@
 package com.example.playground;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.playground.adapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

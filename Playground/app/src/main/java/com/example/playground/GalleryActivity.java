@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.example.playground.adapter.GalleryImageAdapter;
+
 public class GalleryActivity extends Activity {
     ImageView selectedImage;
 

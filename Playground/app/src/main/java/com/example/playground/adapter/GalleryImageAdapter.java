@@ -1,4 +1,4 @@
-package com.example.playground;
+package com.example.playground.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+
+import com.example.playground.R;
 
 /**
  * Created by anupamchugh on 24/10/15.

@@ -24,8 +24,8 @@ public class DataBindingActivity extends Activity {
         binding.setHandlers(this);
     }
 
-    public void onCustomClickButton(View view) {
-        String newName = ((EditText) findViewById(R.id.editText)).getText().toString();
-        mUser.setName(newName);
-    }
+//    public void onCustomClickButton(View view) {
+//        String newName = ((EditText) findViewById(R.id.editText)).getText().toString();
+//        mUser.setName(newName);
+//    }
 }

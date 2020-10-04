@@ -1,4 +1,4 @@
-package com.example.playground;
+package com.example.playground.adapter;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.playground.R;
 
 public class CardListAdapter extends ArrayAdapter<PackageInfo> {
     LayoutInflater inflater;

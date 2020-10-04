@@ -1,4 +1,4 @@
-package com.example.playground;
+package com.example.playground.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.playground.R;
 import com.example.playground.RowData;
+import com.example.playground.ViewHolder;
 
 import java.util.List;
 
