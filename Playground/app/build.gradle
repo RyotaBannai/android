@@ -25,6 +25,7 @@ android {
         main {
             assets.srcDirs = ['src/main/assets']
             res.srcDirs = [
+                    'src/main/res/layout/bindings/',
                     'src/main/res/layout/fragment/',
                     'src/main/res/layout/intent/',
                     'src/main/res/layout/infrator/',
@@ -32,6 +33,10 @@ android {
                     'src/main/res/',
             ]
         }
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
