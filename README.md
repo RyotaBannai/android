@@ -35,6 +35,7 @@ LayoutInflater inflater = getLayoutInflater();
 // システムサービスから取得
 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 ```
+- [RecyclerView and ViewHolder](https://qiita.com/naoi/items/f8a19d6278147e98bbc2)
 - intent で「上方向へのナビゲーションを追加する」つまりヘッダーに戻るボタンを自動的に設置する [ref](https://developer.android.com/training/basics/firstapp/starting-activity#Up)
 ```xml
 <activity android:name=".DisplayMessageActivity"
