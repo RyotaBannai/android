@@ -24,7 +24,16 @@ getLayoutInflator().inflate(R.layout.inflate_layout, root);
 Context context = getApplicationContext();
 LayoutInflater inflater = LayoutInflater.from(context);
 // Or LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-inflaterinflate(R.layout.inflate_layout, root)
+inflater.inflate(R.layout.inflate_layout, root)
+```
+- [ListView good article](https://qiita.com/yu_eguchi/items/65311af1c9fc0bff0cb0#%E8%A7%A3%E8%AA%AC-1)
+```java
+// コンテキストから取得
+LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+// アクティビティから取得
+LayoutInflater inflater = getLayoutInflater();
+// システムサービスから取得
+LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 ```
 - intent で「上方向へのナビゲーションを追加する」つまりヘッダーに戻るボタンを自動的に設置する [ref](https://developer.android.com/training/basics/firstapp/starting-activity#Up)
 ```xml
