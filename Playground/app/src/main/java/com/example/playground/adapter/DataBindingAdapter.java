@@ -38,5 +38,4 @@ public class DataBindingAdapter extends ArrayAdapter<User> {
         binding.setUser(getItem(position));
         return binding.getRoot();
     }
-
 }
