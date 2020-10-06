@@ -8,21 +8,27 @@
             type="com.example.playground.data.User2" />
     </data>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{String.valueOf(user2.age)}" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{user2.name}" />
-
-    <ProgressBar
-        style="@android:style/Widget.Holo.Light.ProgressBar.Inverse"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="@{user2.age}" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(user2.age)}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user2.name}" />
+
+        <ProgressBar
+            style="@android:style/Widget.Holo.Light.ProgressBar.Inverse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="@{user2.age}" />
+    </LinearLayout>
 </layout>

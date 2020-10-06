@@ -47,3 +47,5 @@ LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLAT
 - [Fragment passing arguments](https://qiita.com/Reyurnible/items/dffd70144da213e1208b)
 - [dp に関して](https://qiita.com/nein37/items/0a92556a80c6c14503b2)
 - [Constraint Layout](https://qiita.com/nakker1218/items/0faa8c1ab504cc4cedea)
+- カスタムレイアウト: 既存 View を継承して作成。
+

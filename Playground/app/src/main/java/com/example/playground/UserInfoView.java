@@ -10,16 +10,14 @@ import androidx.databinding.DataBindingUtil;
 import com.example.playground.data.User2;
 import com.example.playground.databinding.ViewUserInfoBinding;
 
-import javax.annotation.Nullable;
-
 public class UserInfoView extends LinearLayout {
     ViewUserInfoBinding mBinding;
 
-//    public UserInfoView(Context context) {
-//        super(context);
-//    }
+    public UserInfoView(Context context) {
+        super(context);
+    }
 
-    public UserInfoView(Context context, @Nullable AttributeSet attrs) {
+    public UserInfoView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater inflater = LayoutInflater.from(context);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.view_user_info, this, false); // being forced to set value from/ by layout
