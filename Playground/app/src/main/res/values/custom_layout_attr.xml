@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomLayout">
+        <attr name="EnableToSend" format="boolean" />
+        <attr name="ButtonName" format="enum">
+            <enum name="send" value="0" />
+            <enum name="save" value="1" />
+            <enum name="delete" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>
