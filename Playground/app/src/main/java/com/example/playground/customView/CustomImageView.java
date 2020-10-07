@@ -18,6 +18,10 @@ import android.widget.TextView;
  * RelativeLayout を使いたいときは、merge tag 内のタグに relative 属性を追加すること
  * */
 
+/*
+ * reference: https://qiita.com/yst_i/items/5cc766dc95e2cfc97a40
+ * */
+
 public class CustomImageView extends LinearLayout {
     private Context mContext;
 
@@ -39,6 +43,7 @@ public class CustomImageView extends LinearLayout {
 
         mContext = context;
         setOrientation(VERTICAL); // must to set Orientation here.
+//        this.setOrientation(LinearLayout.VERTICAL); // If you do programically like this.
 
         LayoutInflater inflater = LayoutInflater.from(context);
         // inflate layout with merge tag

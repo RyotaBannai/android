@@ -18,18 +18,19 @@ import com.example.playground.R;
 import javax.annotation.Nullable;
 
 /*
-* ref: custom layout and custom view http://ojed.hatenablog.com/entry/2015/12/05/161013#layout
-* */
+ * ref: custom layout and custom view http://ojed.hatenablog.com/entry/2015/12/05/161013#layout
+ * */
 public class CustomLayout extends LinearLayout implements View.OnClickListener {
     private TextView viewText;
     private EditText editText;
+
     /* Add two below module to use styleable */
     private boolean mEnableToSend;
     private int mButtonName;
 
     public CustomLayout(Context context, @Nullable AttributeSet attr) {
         super(context, attr);
-        View layout = LayoutInflater.from(context).inflate(R.layout.custom_layout, this); // need to be inflate!!!
+        View layout = LayoutInflater.from(context).inflate(R.layout.custom_layout, this, true); // need to be inflate!!!
 
         /* This TypedArray should be recycled after use with #recycle() */
         TypedArray a = context.obtainStyledAttributes(attr, R.styleable.CustomLayout, 0, 0);
@@ -40,16 +41,21 @@ public class CustomLayout extends LinearLayout implements View.OnClickListener {
         } finally {
             a.recycle();
         }
-        Button button = (Button) layout.findViewById(R.id.button);
+        Button button = (Button) layout.findViewById(R.id.customButton);
         button.setOnClickListener(this);
+
         switch (mButtonName) {
-            default:
             case 0:
                 button.setText("send");
+                break;
             case 1:
                 button.setText("save");
+                break;
             case 2:
                 button.setText("delete");
+                break;
+            default:
+                break;
         }
 
         viewText = (TextView) layout.findViewById(R.id.textView);
@@ -57,10 +63,21 @@ public class CustomLayout extends LinearLayout implements View.OnClickListener {
     }
 
     public void onClick(View view) {
-        if (view.getId() == R.id.button) {
+        if (view.getId() == R.id.customButton) {
             if (mEnableToSend)
                 viewText.setText(editText.getText());
             editText.setText(null);
         }
+    }
+
+    /*
+     * Add setter to change attrs dynamically.
+     * */
+    public void setmEnableToSend(Boolean enable) {
+        this.mEnableToSend = enable;
+    }
+
+    public void setmButtonName(int buttonNameEnum) { // int because attrs are Enum values
+        this.mButtonName = buttonNameEnum;
     }
 }
