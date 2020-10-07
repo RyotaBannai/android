@@ -6,18 +6,21 @@
     android:orientation="vertical">
 
     <com.example.playground.customView.CustomLayout
+        android:id="@+id/custom_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:EnableToSend="true"
         custom:ButtonName="send"/>
 
     <com.example.playground.customView.CustomLayout
+        android:id="@+id/custom_layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:EnableToSend="true"
         custom:ButtonName="save"/>
 
     <com.example.playground.customView.CustomLayout
+        android:id="@+id/custom_layout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:EnableToSend="false"

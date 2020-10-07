@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 
 /*
  * ref: custom layout and custom view http://ojed.hatenablog.com/entry/2015/12/05/161013#layout
+ * ref https://qiita.com/kaleidot725/items/f0e8cb8a6a1b0a397f3c
  * */
 public class CustomLayout extends LinearLayout implements View.OnClickListener {
     private TextView viewText;
@@ -72,12 +73,17 @@ public class CustomLayout extends LinearLayout implements View.OnClickListener {
 
     /*
      * Add setter to change attrs dynamically.
+     * 多分動的に変えるようにしたいなら、直接 setText などを呼び出す必要がある
      * */
     public void setmEnableToSend(Boolean enable) {
         this.mEnableToSend = enable;
+//        this.invalidate();
+//        this.requestLayout();
     }
 
     public void setmButtonName(int buttonNameEnum) { // int because attrs are Enum values
         this.mButtonName = buttonNameEnum;
+//        this.invalidate();
+//        this.requestLayout();
     }
 }

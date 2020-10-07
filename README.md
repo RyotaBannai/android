@@ -48,6 +48,9 @@ LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLAT
 - [dp に関して](https://qiita.com/nein37/items/0a92556a80c6c14503b2)
 - [Constraint Layout](https://qiita.com/nakker1218/items/0faa8c1ab504cc4cedea)
 - カスタムレイアウト: 既存 View を継承して作成。
+- カスタムビューの種類: 
+  - `フルカスタムコンポーネント`: `View` を継承していちから新たなコンポーネントを作成するパターン
+  - `複合コンポーネント`: 既存のコンポーネントを複数組み合わせて新たなコンポーネントを作成するパターン
 - While using attributes like `android:textAppearance` it directly uses the predefined specific sp values for the textSize.
 ```java
 android:textAppearance="?android:textAppearanceSmall" // => 14sp
