@@ -18,7 +18,7 @@ import com.example.playground.R;
 import javax.annotation.Nullable;
 
 /*
-* ref: custom view http://ojed.hatenablog.com/entry/2015/12/05/161013#layout
+* ref: custom layout and custom view http://ojed.hatenablog.com/entry/2015/12/05/161013#layout
 * */
 public class CustomLayout extends LinearLayout implements View.OnClickListener {
     private TextView viewText;
