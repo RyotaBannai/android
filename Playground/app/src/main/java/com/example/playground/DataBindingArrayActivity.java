@@ -12,6 +12,9 @@ import com.example.playground.databinding.MainActivityBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * ref: https://qiita.com/Omoti/items/537d9a86b4a5e95b35ed
+ * */
 public class DataBindingArrayActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
