@@ -74,3 +74,8 @@ android:textAppearance="?android:textAppearanceLarge" // => 22sp
   - If you need an Application context, you should extend `AndroidViewModel` which is simply a ViewModel that includes an Application reference.
   - 再作成されたアクティビティが受け取る ViewModel インスタンスは、`最初のアクティビティで作成されたものと同じ`。オーナーのアクティビティが終了すると、フレームワークは、リソースをクリーンアップできるように `ViewModel` オブジェクトの `onCleared()` メソッドを呼び出す。
   - ViewModel オブジェクトには `LifecycleObservers`（`LiveData` オブジェクトなど）を含めることができる。
+- MVVM: View Controllers -> ViewModel(Live Data) -> Repository -> (Model(Room) -> SQLite) | Remote Data Source(Retrofit) -> Web Services [ref](https://developer.android.com/jetpack/docs/guide#overview)
+ - アクティビティとフラグメントはビューモデルにのみ依存します。他の複数のクラスに依存するクラスはリポジトリのみです。この例のリポジトリは、永続データモデルとリモートのバックエンド データソースに依l
+ - モデルクラスに落とし込んで整えられたデータの取得/保存を、Repository に委任する
+ - Model からのデータの取得を Repository に全て委任することで、Repository がデータの取得先を変更したとしても、ViewModel を変更する必要がなくなります
+ - Room ライブラリでは、DAO（Data Access Object）を通して、DB にデータを挿入・取得する
