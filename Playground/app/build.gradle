@@ -21,6 +21,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     sourceSets {
         main {
             assets.srcDirs = ['src/main/assets']
@@ -67,13 +72,19 @@ dependencies {
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:$arch_version"
 
+    // API Request
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
     // add
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.google.android.libraries.maps:maps:3.1.0-beta'
     implementation name: 'places-maps-sdk-3.1.0-beta', ext: 'aar'
     implementation 'com.google.android.gms:play-services-gcm:17.0.0'
     implementation 'com.google.auto.value:auto-value-annotations:1.6.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'androidx.wear:wear:1.0.0'
     implementation 'com.vanniktech:onactivityresult:0.7.0'
     annotationProcessor 'com.vanniktech:onactivityresult-compiler:0.7.0'
