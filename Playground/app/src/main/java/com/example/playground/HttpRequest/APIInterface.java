@@ -27,7 +27,8 @@ interface APIInterface {
      * => list?key=value
      * */
     @GET("/api/unknown")
-    Call<MultipleResources> doGetListResources(@QueryMap Map<String, Integer> options);
+//    Call<MultipleResources> doGetListResources(@QueryMap Map<String, Integer> options);
+    Call<MultipleResources> doGetListResources(@Query("page") Integer page);
 
     @POST("/api/users")
     Call<User> createUser(@Body User user);
