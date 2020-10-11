@@ -80,3 +80,11 @@ android:textAppearance="?android:textAppearanceLarge" // => 22sp
 - Model からのデータの取得を Repository に全て委任することで、Repository がデータの取得先を変更したとしても、ViewModel を変更する必要がなくなります
 - Room ライブラリでは、DAO（Data Access Object）を通して、DB にデータを挿入・取得する
 - `POJO` class act as the method return type.
+
+### Room
+
+- `Entity`: Annotated class that describes a database table when working with Room.
+- `SQLite database`: On device storage. The Room persistence library creates and maintains this database for you.
+- `DAO`: Data access object. A mapping of SQL queries to functions. When you use a DAO, you call the methods, and Room takes care of the rest.
+- `Room database`: Simplifies database work and serves as an access point to the underlying SQLite database (`hides SQLiteOpenHelper`). The Room database uses the DAO to issue queries to the SQLite database.
+- `Repository`: Used to manage multiple data sources.
