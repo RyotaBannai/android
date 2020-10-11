@@ -10,4 +10,5 @@
     <string name="fragment3">Fragment3</string>
     <string name="reminder">Your name</string>
     <string name="done">Done</string>
+    <string name="holiday_activity_java">HolidayActivityJava</string>
 </resources>
