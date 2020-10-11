@@ -15,7 +15,6 @@ public class Word {
 //    @PrimaryKey(autoGenerate = true)
 //    private int id;
 
-
     @PrimaryKey
     @NonNull
     // NonNull field must be initialized // Denotes that a parameter, field, or method return value can never be null.
