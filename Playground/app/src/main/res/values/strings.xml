@@ -11,4 +11,5 @@
     <string name="reminder">Your name</string>
     <string name="done">Done</string>
     <string name="holiday_activity_java">HolidayActivityJava</string>
+    <string name="add_word">Add Word</string>
 </resources>
