@@ -21,7 +21,7 @@ public class Word {
     @ColumnInfo(name = "word")
     private String mWord;
 
-    public Word(String word) { // specify table column name
+    public Word(@NonNull String word) { // specify table column name
         this.mWord = word;
     }
 
