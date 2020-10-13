@@ -20,7 +20,7 @@ public class WordRepository {
 
     public WordRepository(Application application) {
         WordRoomDatabase db = WordRoomDatabase.getDatabase(application);
-        mWordDao = db.wordDao();
+        mWordDao = db.wordDao(); // abstract getter method
         mAllWords = mWordDao.getAlphabetizedWords();
     }
 

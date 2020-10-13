@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.playground.MainActivity;
 import com.example.playground.R;
 import com.example.playground.room.db.entity.Word;
 import com.example.playground.room.db.viewModel.WordViewModel;
@@ -41,7 +40,7 @@ public class RoomMainActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
 
         mWordViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(WordViewModel.class);
-        mWordViewModel.getmAllWords().observe(this, new Observer<List<Word>>() {
+        mWordViewModel.getmAllWords().observe(this, new Observer<List<Word>>() { // db が更新されたら LiveData も変化して onChanged メソッドが呼ばれる
             @Override
             public void onChanged(List<Word> words) {
                 adapter.setmWords(words);

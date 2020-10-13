@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.playground.room.db.dao.WordDao;
@@ -16,9 +17,13 @@ import java.util.concurrent.Executors;
 
 /*
  * When you modify the database schema, you'll need to update the version number and define a migration strategy
+ * if you don't want to keep history of versions, then set exportSchema = false. default is true;
  * */
-@Database(entities = {Word.class}, version = 1, exportSchema = false)
+@Database(entities = {Word.class}, version = 1, exportSchema = true)
 public abstract class WordRoomDatabase extends RoomDatabase {
+    /*
+     * The database exposes DAOs through an abstract "getter" method for each @Dao.
+     * */
     public abstract WordDao wordDao();
 
     private static volatile WordRoomDatabase INSTANCE;
@@ -33,6 +38,12 @@ public abstract class WordRoomDatabase extends RoomDatabase {
                             context.getApplicationContext(),
                             WordRoomDatabase.class,
                             "word_database")
+//                            .addMigrations(MIGRATION_1_2)
+                            /*
+                             * .fallbackToDestructiveMigrationFrom(1, 2) // 1から2と2から3にマイグレーションするときに Database が再生成
+                             * .addMigrations(MIGRATION_3_4)             // 3から4のときは通常のマイグレーション
+                             *
+                             * */
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
@@ -65,6 +76,20 @@ public abstract class WordRoomDatabase extends RoomDatabase {
                 word = new Word("World");
                 dao.insert(word);
             });
+        }
+    };
+
+    /*
+     * Migration code
+     * ref:
+     * understanding migration: https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
+     * @TypeConverter annotation: https://android.jlelse.eu/5-steps-to-implement-room-persistence-library-in-android-47b10cd47b24
+     * https://qiita.com/b_a_a_d_o/items/45bda89f49bf163144af
+     * https://medium.com/@star_zero/room%E3%81%AE%E3%83%9E%E3%82%A4%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%BE%E3%81%A8%E3%82%81-a07593aa7c78
+     * */
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) { // version 1 から 2 になる時に適用される
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS `word_table` (`word` TEXT NOT NULL, PRIMARY KEY(`word`))"); // 実際の SQL の中身は 2.json の内容を
         }
     };
 }
