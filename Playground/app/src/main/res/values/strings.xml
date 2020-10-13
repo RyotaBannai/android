@@ -12,4 +12,7 @@
     <string name="done">Done</string>
     <string name="holiday_activity_java">HolidayActivityJava</string>
     <string name="add_word">Add Word</string>
+    <string name="hint_word">Word....</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
 </resources>

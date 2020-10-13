@@ -62,9 +62,9 @@ public abstract class WordRoomDatabase extends RoomDatabase {
                 // If you want to start with more words, just add them.
                 Word word = new Word("Hello");
                 dao.insert(word);
-                word = new Word("Hello");
+                word = new Word("World");
                 dao.insert(word);
             });
         }
-    }
+    };
 }

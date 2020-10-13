@@ -47,7 +47,7 @@ android {
                     'src/main/res/layout/intent/',
                     'src/main/res/layout/infrator/',
                     'src/main/res/layout/default',
-                    'src/main/res/', 'src/main/res', 'src/main/res/layout/customView',
+                    'src/main/res/', 'src/main/res', 'src/main/res/layout/customView', 'src/main/res/dimes',
             ]
         }
     }
