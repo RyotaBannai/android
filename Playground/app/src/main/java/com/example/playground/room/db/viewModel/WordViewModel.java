@@ -16,6 +16,10 @@ import java.util.List;
  * */
 
 public class WordViewModel extends AndroidViewModel {
+    /*
+     * Also you can hold local data without caring UI Controller's life cycle
+     * ref: https://medium.com/androiddevelopers/viewmodels-a-simple-example-ed5ac416317e
+     * */
     private WordRepository mRepository;
 
     private LiveData<List<Word>> mAllWords;
