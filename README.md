@@ -106,3 +106,18 @@ WorkManager.getInstance(...)
     .then(workC)
     .enqueue();
 ```
+
+- `フレックス期間`のある定期的な処理を定義する: `repeatInterval` と一緒に `flexInterval` を渡す
+  - `フレックス期間`は `repeatInterval - flexInterval` から始まり、`間隔の最後`まで続く
+  - 繰り返し間隔は `PeriodicWorkRequest.MIN_PERIODIC_INTERVAL_MILLIS` 以上で、フレックス間隔は `PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS` 以上である必要がある
+  - `定期的な処理に対する制約の影響`: たとえば、ユーザーのデバイスが充電中の場合にのみ処理が実行されるように、WorkRequest に制約を追加できるが。この場合、定義された繰り返し間隔が経過しても、この条件が満たされるまで PeriodicWorkRequest は実行されない。そのため、`実行間隔内に条件が満たされない場合`、特定の処理の実行が`遅延`したり、`スキップ`されたりする可能性がある。[制約一覧](https://developer.android.com/reference/androidx/work/Constraints#requiresBatteryNotLow)
+  - `処理の実行中に制約が満たされなくなる`と、WorkManager がワーカーを`停止`. その後、`すべての制約が満たされる`と、処理が`再試行`
+
+```java
+WorRequest saveRequest = new PeriodicWorkRequest
+                          .Builder(SaveImageToFolderWorker.class,
+                            1, TimeUnit.HOURS,
+                            15, TimeUnit.MINUTES
+                            )
+                          .build();
+```
