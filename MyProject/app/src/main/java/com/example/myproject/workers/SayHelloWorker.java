@@ -23,6 +23,7 @@ public class SayHelloWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+//        getInputData().getString("IMAGE_URL"); // get input data
         int int_random = rand.nextInt(upperBound);
         if (int_random % 2 == 0) {
             // Do the work here--in this case, Log
@@ -40,5 +41,11 @@ public class SayHelloWorker extends Worker {
 
     public void sayHello() {
         Log.d(TAG, "Hello");
+    }
+
+    @Override
+    public void onStopped() {
+        super.onStopped();
+        Log.d(TAG, TAG + "has stopped!");
     }
 }

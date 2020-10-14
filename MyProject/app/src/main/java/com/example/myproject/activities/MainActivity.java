@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doWork() {
+        String WorkerTAG = "SAY_HELLO";
         // v1 //
         // WorkRequest sayHelloRequest = new OneTimeWorkRequest.Builder(SayHelloWorker.class).build(); // WorkRequest とそのサブクラスは、作業を実行する方法とタイミングを定義
         /*
@@ -39,7 +41,27 @@ public class MainActivity extends AppCompatActivity {
          * */
         // v2 //
         // 注: 定義可能な最小繰り返し間隔は 15 分 JobScheduler API と同じ
-        WorkRequest sayHelloRequest = new PeriodicWorkRequest.Builder(SayHelloWorker.class, 15, TimeUnit.MINUTES).build();
-        WorkManager.getInstance(myContext).enqueue(sayHelloRequest); // enqueue() メソッドを使用して WorkRequest を WorkManager に送信
+        PeriodicWorkRequest sayHelloRequest = new PeriodicWorkRequest
+                .Builder(SayHelloWorker.class, 15, TimeUnit.MINUTES)
+                .addTag(WorkerTAG)
+                .build();
+//        WorkManager.getInstance(myContext).enqueue(sayHelloRequest); // enqueue() メソッドを使用して WorkRequest を WorkManager に送信
+
+        // Cancel all work before set new one just in case
+        WorkManager.getInstance(myContext).cancelAllWork(); // Upon cancellation, ListenableWorker.onStopped() will be invoked for any affected workers.
+        WorkManager.getInstance(myContext).enqueueUniquePeriodicWork(
+                "say_hello", // or just add WorkerTAG
+                ExistingPeriodicWorkPolicy.REPLACE,
+                sayHelloRequest);
+
+        /*
+         * set input data:
+         * .setInputData(
+         *        new Data.Builder()
+         *          .putString("IMAGE_URI", "http://...")
+         *           .build()
+         *  )
+         * 戻り値を渡すこともできる
+         * */
     }
 }

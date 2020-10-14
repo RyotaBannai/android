@@ -121,3 +121,6 @@ WorRequest saveRequest = new PeriodicWorkRequest
                             )
                           .build();
 ```
+
+- `バックオフポリシー`: `Result.retry()` を使って再試行する際に使用。最小バックオフ遅延は 10 秒、ポリシーが `LINEAR`に設定されているので、１試行ごとに 10 秒増加される。つまり 10 秒後に試行、その 20 秒後に試行,,, `EXPONENTIAL` も使える.
+-
