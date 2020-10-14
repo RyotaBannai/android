@@ -88,3 +88,21 @@ android:textAppearance="?android:textAppearanceLarge" // => 22sp
 - `DAO`: Data access object. A mapping of SQL queries to functions. When you use a DAO, you call the methods, and Room takes care of the rest.
 - `Room database`: Simplifies database work and serves as an access point to the underlying SQLite database (`hides SQLiteOpenHelper`). The Room database uses the DAO to issue queries to the SQLite database.
 - `Repository`: Used to manage multiple data sources.
+
+### WorkManager
+
+- `アプリが終了した場合`や`デバイスが再起動した場合`でも実行される、`延期可能な（つまり、直ちに実行する必要がない処理）非同期タスクのスケジュールを簡単に設定する`ための API
+- `FirebaseJobDispatcher`、`GcmNetworkManager`、`ジョブ スケジューラ`など、以前のすべての Android バックグラウンド スケジューリング API の代わりに使用することが推奨されている
+  - `API 23+` であれば、内部は `Job Scheduler` が使用される
+- `処理の制約`: 処理の制約を使用して、処理の実行に最適な条件を宣言的に定義（たとえば、デバイスが Wi-Fi につながっているとき、アイドル状態のとき、十分な保存容量があるときにだけ実行など）
+- `柔軟なスケジューリング` ウィンドウを使用して、1 回限り、または繰り返し実行するように処理のスケジュールを設定できる。`処理にタグや名前を付けて`、`一意で置き換え可能な処理のスケジュール設定`、`処理グループのモニタリングやキャンセルをまとめて行う`ことができる。スケジュール設定された処理は、内部で管理されている SQLite データベースに保存される。WorkManager により、デバイスの再起動後もこの処理が確実に保持され、スケジュールの再設定が行われる。
+- `柔軟な再試行ポリシー`: 処理は失敗することもあるため、WorkManager には、設定可能な`指数バックオフ ポリシー`など、`柔軟な再試行ポリシー`が用意されている。
+- `処理の連結`: 複雑な作業の場合は、シームレスで自然なインターフェースを使用して個々の処理タスクを連結することにより、どの部分を順次実行し、どの部分を並列実行するかを制御できる。処理を連結すると、WorkManager により、`1 つの処理タスクの出力データが自動的に次の処理タスクに渡される`(メソッドチェーンのような感じ)
+-
+
+```java
+WorkManager.getInstance(...)
+    .beginWith(Arrays.asList(workA, workB))
+    .then(workC)
+    .enqueue();
+```
