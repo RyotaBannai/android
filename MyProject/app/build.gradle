@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+ext {
+    work_version = "2.4.0"
+}
 
 android {
     compileSdkVersion 30
@@ -20,7 +23,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets']
+            res.srcDirs = [
+                    'src/main/res/layouts/default/',
+                    'src/main/res/layouts/archive/',
+                    'src/main/res/layouts/',
+                    'src/main/res/',
+            ]
+        }
+    }
 }
+
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -28,5 +49,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // WorkManager
+    implementation "androidx.work:work-runtime:$work_version"
 
 }
