@@ -11,14 +11,61 @@
   > 　その点、getApplicationContext()で取得できる Context 情報は Activity のライフサイクルに依存せず、
   > 　アプリケーションとしての純粋な情報となるため、メモリリークの危険性を回避できます。
   > 　 Context を必要とする API には、可能な限り getApplicationContext()を渡すようにしましょう。
+
+#### UI の保持
+
+- アプリがバックグラウンドにあり、システムはアプリのプロセスをメモリに保持しようと最善を尽くすが、ユーザーが他のアプリを操作している間にアプリのプロセスがシステムによって破棄されることがある。この場合、アクティビティインスタンスはそのインスタンスに保存されているすべての状態と一緒に破棄される。
+
+  - Android の基本的な特徴のうち、一般的ではないものとして、`アプリケーション プロセスの存続期間がアプリケーションによって直接制御されない`ということがあります。存続期間は、システムによって、実行中であることが認識されているアプリケーション、ユーザーにとっての重要度、システム全体での空きメモリ量の組み合わせから決定されます。
+
+- プロセスのライフサイクルに関連する不具合としてよくあるのは、`BroadcastReceiver` が `BroadcastReceiver.onReceive()` メソッド内でインテントを受け取る際にスレッドを開始し、関数から戻ってしまう場合です。関数から戻ると、BroadcastReceiver が無効になったため、ホストプロセスが不要になった（プロセス中で他のアプリケーション コンポーネントが有効でない場合）とシステムにみなされます
+- [reference](https://developer.android.com/guide/components/activities/process-lifecycle.html)
+
+#### onSaveInstanceState
+
+- いつ呼ばれるか：`onPause`の直後
+- いつ復元できるか：`onSavedInstanceState`で保存した値は、`onCreate`もしくは`onRestoreInstanceState`(null チェック不要)で復元が可能
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    if (savedInstanceState != null) {
+        score = savedInstanceState.getInt(STATE_SCORE);
+        level = savedInstanceState.getInt(STATE_LEVEL);
+    }
+    ...
+}
+
+@Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        score = savedInstanceState.getInt(STATE_SCORE);
+        level = savedInstanceState.getInt(STATE_LEVEL);
+    }
+```
+
+- Bundle はどこに保存される: Bundle は前述のタイミングで onSavedInstanceState が呼ばれた後、`アプリのプロセス`から `SystemServer のプロセス`の `ActivityRecord`(`各 Activity のキャッシュのようなもの)`に保存される。SystemServer プロセスは前面に出ているアプリや、通話アプリのような永続化プロセスよりも優先度が高くなっているため、`相当な異常がない限りは kill されない`
+- 使い方: `onSaveInstanceState()` に保存したい内容を記述する
+
+```java
+@Override
+private void onSaveInstanceState(@Nonnull Bundle outState){
+  outState.putInt(STATE_INDEX, 1);
+  super.onStateInstanceState(outState);
+}
+```
+
+#### Misc
+
 - [Alergdialog](https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android)
 - CheckBox クラスは `CompoundButton`クラスのサブクラスである.(CheckBox の親は TextView)`CompoundBotton`クラスは Button クラスのサブクラスで２つ以上の情報を保持するためのクラス.
 - [Toast](https://developer.android.com/guide/topics/ui/notifiers/toasts)
 - [add aar package](https://stackoverflow.com/questions/16682847/how-to-manually-include-external-aar-package-using-new-gradle-android-build-syst)
 - [Google Map api v3 on Android](https://developers.google.com/maps/documentation/android-sdk/start#None-java)
 - [状態の保存に関して](https://developer.android.com/topic/libraries/architecture/saving-states)
-- AdapterView -> ListView class. AdapterView class は アダプターを使って別に用意されたデータを小要素として持つ View. 例えばリストは、リストに表示される個々のデータが小要素となり、個々のデータはアダプターを使ってリストに割り当てられる.
-- 縦に長い View を表示するのに `ScroolView`（ViewGroup）を使うことがあるが、`ListView`はその ScrollView の子クラスである.
+- `AdapterView` -> `ListView` class. `AdapterView` class は アダプターを使って別に用意されたデータを小要素として持つ `View`. 例えばリストは、リストに表示される個々のデータが小要素となり、個々のデータはアダプターを使ってリストに割り当てられる.
+- 縦に長い View を表示するのに `ScrollView`（ViewGroup）を使うことがあるが、`ListView`はその ScrollView の子クラスである.
 - inflate 方法 [ref](https://akira-watson.com/android/inflate.html)
 
 ```java
