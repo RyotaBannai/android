@@ -114,6 +114,8 @@ android:textAppearance="?android:textAppearanceMedium" // => 18sp
 android:textAppearance="?android:textAppearanceLarge" // => 22sp
 ```
 
+### ViewModel
+
 - `ViewModel`: the purpose of the ViewModel class is to store data somewhere else, outside of the `Activity`
   - `UI controller`: both `Fragments` and `Activities`, which use ViewModels.
   - `transient UI data`, which is data needed for the UI. Examples include data the user enters, data generated during runtime, or data loaded from a database.
@@ -135,6 +137,12 @@ android:textAppearance="?android:textAppearanceLarge" // => 22sp
 - `DAO`: Data access object. A mapping of SQL queries to functions. When you use a DAO, you call the methods, and Room takes care of the rest.
 - `Room database`: Simplifies database work and serves as an access point to the underlying SQLite database (`hides SQLiteOpenHelper`). The Room database uses the DAO to issue queries to the SQLite database.
 - `Repository`: Used to manage multiple data sources.
+
+### LiveData
+
+- LiveData はアクティブ(ライフサイクルの状態が STARTED または RESUMED)な Observer （UI コントローラ）のみ通知する
+- Observer は、`LifecycleOwner` インターフェースを実装するオブジェクトとペアで登録できる。このようにペアリングすることで、対応する Lifecycle オブジェクトの状態が `DESTROYED` に変わったときに Observer を削除できる。
+- LiveData には、格納されているデータを更新するための公開メソッドはない。LiveData オブジェクトに格納されている値を編集する必要がある場合は、`MutableLiveData` クラスで公開されている `setValue(T)` メソッドと `postValue(T)` メソッドを使用する必要がある。
 
 ### WorkManager
 
