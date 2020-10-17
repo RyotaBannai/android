@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -13,11 +14,13 @@ public class SayHelloWorker extends Worker {
     final static String TAG = "SayHelloWorker";
     private Random rand = new Random();
     private int upperBound = 10;
+    private static final String PROGRESS = "PROGRESS";
 
     public SayHelloWorker(
             @NonNull Context context,
             @NonNull WorkerParameters params) {
         super(context, params);
+        setProgressAsync(new Data.Builder().putInt(PROGRESS, 0).build());
     }
 
     @NonNull
@@ -29,6 +32,8 @@ public class SayHelloWorker extends Worker {
             // Do the work here--in this case, Log
             sayHello();
             // Indicate whether the work finished successfully with the Result
+
+            setProgressAsync(new Data.Builder().putInt(PROGRESS, 100).build());
             return Result.success();
         } else {
             return Result.failure();

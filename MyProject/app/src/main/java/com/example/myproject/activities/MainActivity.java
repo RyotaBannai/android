@@ -2,11 +2,14 @@ package com.example.myproject.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.work.Data;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
@@ -25,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     private Context myContext;
+    private final String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
          * 戻り値を渡すこともできる
          * */
 
-        ListenableFuture<WorkInfo> info = WorkManager.getInstance(myContext).getWorkInfoById(sayHelloRequest.getId());
+//        ListenableFuture<WorkInfo> info = WorkManager.getInstance(myContext).getWorkInfoById(sayHelloRequest.getId());
         /*
          * ListenableFuture<WorkInfo> — aFuture that allows adding the listener which will be notified when the work with the specific id completes.
          * */
@@ -89,11 +93,20 @@ public class MainActivity extends AppCompatActivity {
         /*
          * Worker の状態変化をモニタリング
          * */
-        WorkManager.getInstance(myContext).getWorkInfoByIdLiveData(sayHelloRequest.getId()).observe(this, workInfo -> {
-            if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
-                Toast.makeText(myContext, String.format("%b", workInfo.getState().isFinished()), Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(myContext, "not finished yet ", Toast.LENGTH_SHORT).show();
+        WorkManager.getInstance(myContext).getWorkInfoByIdLiveData(sayHelloRequest.getId()).observe(this, new Observer<WorkInfo>() {
+            @Override
+            public void onChanged(@Nullable WorkInfo workInfo) {
+//            if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
+                Data progress = workInfo.getProgress();
+                int value = progress.getInt("PROGRESS", 0);
+                Log.d(TAG, String.format("%d", value));
+                if (value == 100) {
+//                Toast.makeText(myContext, String.format("%b", workInfo.getState().isFinished()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(myContext, "Success! Clear periodic worker.", Toast.LENGTH_SHORT).show();
+                    WorkManager.getInstance(myContext).cancelUniqueWork("say_hello");
+                } else {
+                    Toast.makeText(myContext, "not finished yet ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
