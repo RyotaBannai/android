@@ -151,3 +151,8 @@ WorkQuery workQuery = WorkQuery.Builder
      )
     .build();
 ```
+
+- `作業チェーン`：最初の `OneTimeWorkRequest` が作業リクエスト チェーンでキューに登録されると、後続のすべての作業リクエストは、その最初の作業リクエストの`作業が完了するまでブロックされる`
+  - `再試行ポリシーが定義されていないか使い果たされている場合`、または `OneTimeWorkRequest が Result.failure() を返すようななんらかの状態に達した場合`は、`その作業リクエストとすべての依存する作業リクエストが FAILED.` としてマークされる
+  - 同様に CANCELLED の場合は、他のタスクも CANCELLED としてマークされることになる。
+  - [reference](https://developer.android.com/topic/libraries/architecture/workmanager/how-to/chain-work)
