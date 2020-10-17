@@ -123,4 +123,31 @@ WorRequest saveRequest = new PeriodicWorkRequest
 ```
 
 - `バックオフポリシー`: `Result.retry()` を使って再試行する際に使用。最小バックオフ遅延は 10 秒、ポリシーが `LINEAR`に設定されているので、１試行ごとに 10 秒増加される。つまり 10 秒後に試行、その 20 秒後に試行,,, `EXPONENTIAL` も使える.
--
+
+#### 処理の状態
+
+- 1 回限りの処理 Worker の状態で `SUCCEEDED`, `FAILED`, `CANCELLED`のいずれかの`終了状態`にある時には`WorkInfo.State.isFinished()`は `true`を返す。
+- 定期的な処理の状態では, `CANCELLED` のみが終了状態（RETRY, SUCCESS, FAILURE いずれの場合も次の状態が ENQUEUED になる。）
+- ブロック状態: 最終状態の 1 つである `BLOCKED` は、一連の処理、つまり`処理チェーン`にまとめられた処理に適用される
+
+#### 処理の管理
+
+- `一意処理`: 特定の名前が付けられた処理インスタンスが同時に 1 つだけ存在することを保証する強力な概念
+
+  - `WorkManager.enqueueUniqueWork()`: 1 回限りの処理の場合
+  - `WorkManager.enqueueUniquePeriodicWork()`: 定期的な処理の場合
+    - `uniqueWorkName` - WorkRequest を一意に識別するために使用される String。
+    - `existingWorkPolicy` - 一意の名前が付けられた未完了の処理チェーンがまだ存在する場合に WorkManager が行う必要がある処理を指定する enum（REPLACE, KEEP など）。
+    - `work` - スケジュール設定を行う WorkRequest。
+
+- `WorkQuery`: キューに登録されたジョブに関する複雑なクエリを行うことができる。
+  - `getWorkInfoByIdLiveData` も使えるため、`WorkQuery`で指定した条件の時に特定の処理を走らせることができる。
+
+```java
+WorkQuery workQuery = WorkQuery.Builder
+       .fromTags(Arrays.asList("syncTag"))
+       .addStates(Arrays.asList(WorkInfo.State.FAILED, WorkInfo.State.CANCELLED))
+       .addUniqueWorkNames(Arrays.asList("preProcess", "sync")
+     )
+    .build();
+```

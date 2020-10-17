@@ -10,7 +10,7 @@ import androidx.work.WorkerParameters;
 import java.util.Random;
 
 public class SayHelloWorker extends Worker {
-    final static String TAG = "UploadWorker";
+    final static String TAG = "SayHelloWorker";
     private Random rand = new Random();
     private int upperBound = 10;
 

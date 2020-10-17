@@ -2,6 +2,7 @@ package com.example.myproject.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,12 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
 import com.example.myproject.R;
 import com.example.myproject.workers.SayHelloWorker;
+import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,10 +31,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
         myContext = getApplicationContext();
-        doWork();
+        try {
+            doWork();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void doWork() {
+    private void doWork() throws ExecutionException, InterruptedException {
         String WorkerTAG = "SAY_HELLO";
         // v1 //
         // WorkRequest sayHelloRequest = new OneTimeWorkRequest.Builder(SayHelloWorker.class).build(); // WorkRequest とそのサブクラスは、作業を実行する方法とタイミングを定義
@@ -45,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 .Builder(SayHelloWorker.class, 15, TimeUnit.MINUTES)
                 .addTag(WorkerTAG)
                 .build();
+
 //        WorkManager.getInstance(myContext).enqueue(sayHelloRequest); // enqueue() メソッドを使用して WorkRequest を WorkManager に送信
 
         // Cancel all work before set new one just in case
@@ -63,5 +73,28 @@ public class MainActivity extends AppCompatActivity {
          *  )
          * 戻り値を渡すこともできる
          * */
+
+        ListenableFuture<WorkInfo> info = WorkManager.getInstance(myContext).getWorkInfoById(sayHelloRequest.getId());
+        /*
+         * ListenableFuture<WorkInfo> — aFuture that allows adding the listener which will be notified when the work with the specific id completes.
+         * */
+//        info.addListener(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toast.makeText(myContext, "", Toast.LENGTH_SHORT).show();
+//            }
+//        }, Executor);
+        // Toast.makeText(myContext, String.format("%b",info.get().getState().isFinished()), Toast.LENGTH_SHORT).show();
+
+        /*
+         * Worker の状態変化をモニタリング
+         * */
+        WorkManager.getInstance(myContext).getWorkInfoByIdLiveData(sayHelloRequest.getId()).observe(this, workInfo -> {
+            if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
+                Toast.makeText(myContext, String.format("%b", workInfo.getState().isFinished()), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(myContext, "not finished yet ", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
