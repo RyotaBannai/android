@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.myproject.activities.ServiceMainActivity"
+            android:name="com.example.myproject.activities.IntentServiceActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +20,11 @@
 
         <service
             android:name=".service.MyService"
+            android:icon="@drawable/ic_launcher_background"
+            android:label="@string/service_name" />
+
+        <service
+            android:name=".service.HelloIntentService"
             android:icon="@drawable/ic_launcher_background"
             android:label="@string/service_name" />
     </application>

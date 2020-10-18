@@ -35,9 +35,8 @@ public class ServiceMainActivity extends AppCompatActivity {
                 intent.putExtra("REQUEST_CODE", 1);
 
                 // Serviceの開始
-                //startService(intent);
-                startForegroundService(intent); // API level 26 +
                 // startService(intent);
+                startForegroundService(intent); // API level 26 +
             }
         });
 

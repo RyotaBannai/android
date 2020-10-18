@@ -233,5 +233,18 @@ WorkQuery workQuery = WorkQuery.Builder
 - A `service` is only started once, no matter how often you call the `startService()` method
   > What if you call this method twice in your code? Do you have to worry about synchronizing the onStartCommand() method call? No, this method is called by the Android system in the main user interface thread, therefore it cannot be called simultaneously from two different threads.
 - Android はバックグラウンド アプリによるバッグラウンド サービスの作成を許可しない。そのため、Android 8.0 では、`フォアグラウンドで新しいサービスを作成する` `Context.startForegroundService()` メソッドが新たに導入されている。
+
+  > Service がバックグラウンドで動作するので、非同期と勘違いしそうですがそうではなく、Activity から表示 UI を無くしたようなコンポーネントです。ですから別スレッドでの処理が必要なものは Activity と同じように扱います。(つまり、Service もデフォルトではメインスレッドを使っている)
+
   > システムによってサービスが作成されると、アプリは、サービスの startForeground() メソッドを 5 秒以内に呼び出して、その新しいサービスの通知をユーザーに表示します。
   > アプリが startForeground() を制限時間内に呼び出さない場合、サービスが停止し、アプリが ANR になります。
+
+  > `Foreground Service` とは、通常のサービスと違い、通知（Notification）を表示し、バックグラウンドで実行している事をユーザに認識させた状態で実行するものです。
+  > 処理自体は Main スレッドとは別スレッドで実行されているが、ユーザが通知を通じ認識できるため、Foreground Service となります。
+
+- [reference](https://akira-watson.com/android/service.html#4)
+
+- `IntentService`
+  - ワークキューを使った順次処理を行える。ワークキューを使って要求されたタスクを一つづつ実行し、
+    全てが終わると自ら終了してくれる。(Service では 作業が終わっても stopSelf() や stopService() を呼び出して自身でサービスを停止しないと行けない場合がある)
+  - 簡単に別スレッドを使うことができるのが IntentService

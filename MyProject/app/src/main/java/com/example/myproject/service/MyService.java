@@ -41,8 +41,6 @@ public class MyService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // TODO do something useful
-        // サービスで実行させたいコードはここに記述
         super.onStartCommand(intent, flags, startId);
 
         Log.d(TAG, "onStartCommand");
@@ -57,15 +55,15 @@ public class MyService extends Service {
         NotificationChannel channel = new NotificationChannel(channelId, title, NotificationManager.IMPORTANCE_DEFAULT);
         if (notificationManager != null) {
             notificationManager.createNotificationChannel(channel);
-            Notification notificaton = new Notification.Builder(context, channelId)
-                    .setSmallIcon(android.R.drawable.ic_media_play)
-                    .setContentText("MediaPlay")
+            Notification notification = new Notification.Builder(context, channelId)
+                    .setSmallIcon(android.R.drawable.ic_media_play) // on the status bar
+                    .setContentText("MediaPlay") // details on the notification
                     .setAutoCancel(true)
-                    .setContentIntent(pendingIntent)
+                    .setContentIntent(pendingIntent) // ユーザーが Notification をタップした際に Activity を起動する Intent
                     .setWhen(System.currentTimeMillis())
                     .build();
 
-            startForeground(1, notificaton);
+            startForeground(1, notification); // 通知の ID に0を指定すると、通知が表示されないので注意
             audioStart();
         }
 
