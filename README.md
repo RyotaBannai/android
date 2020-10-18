@@ -211,3 +211,27 @@ WorkQuery workQuery = WorkQuery.Builder
   - `再試行ポリシーが定義されていないか使い果たされている場合`、または `OneTimeWorkRequest が Result.failure() を返すようななんらかの状態に達した場合`は、`その作業リクエストとすべての依存する作業リクエストが FAILED.` としてマークされる
   - 同様に CANCELLED の場合は、他のタスクも CANCELLED としてマークされることになる。
   - [reference](https://developer.android.com/topic/libraries/architecture/workmanager/how-to/chain-work)
+
+### ListenableFuture
+
+- allows you to `register callbacks to be executed once the computation is complete`, or `if the computation is already complete, immediately`.
+- [reference to Guava ListenableFuture](https://github.com/google/guava/wiki/ListenableFutureExplained)
+
+### Service
+
+- A service is a component which `runs in the background without direct interaction with the user`. As the service has no user interface, it is `not` bound to the lifecycle of an activity.
+- By default, a service runs in the same process as the main thread of the application. A commonly used pattern for a service implementation is `to create and run a new Thread in the service to perform the processing in the background` and then to terminate the service once it has finished the processing.
+- `Custom services` are started from other `Android components`, i.e., `activities`, `broadcast receivers` and `other services`.
+
+#### When to use Service
+
+- If the user buys an MP3 through your app, and you need to download that MP3 file, an `AsyncTask` is not a good solution.
+  > That could easily take over a second. While the download is going on, the user could switch away from the app (e.g., press HOME). At that point, your process is eligible to be terminated... perhaps before your download is complete. Using an `IntentService` to manage the download is a signal to the OS that you are really doing work here, adding value to the user, and so `the process will be left alone` for a little while.
+- Note that if the background work might take `15+ seconds`, `WakefulBroadcastReceiver` or my `WakefulIntentService` is probably a good idea, so `the device does not fall asleep`while you are trying to wrap up this bit of work.
+- [reference to StackOverFlow](https://stackoverflow.com/questions/21148724/when-to-use-and-when-not-to-use-a-service-in-android)
+
+- A `service` is only started once, no matter how often you call the `startService()` method
+  > What if you call this method twice in your code? Do you have to worry about synchronizing the onStartCommand() method call? No, this method is called by the Android system in the main user interface thread, therefore it cannot be called simultaneously from two different threads.
+- Android はバックグラウンド アプリによるバッグラウンド サービスの作成を許可しない。そのため、Android 8.0 では、`フォアグラウンドで新しいサービスを作成する` `Context.startForegroundService()` メソッドが新たに導入されている。
+  > システムによってサービスが作成されると、アプリは、サービスの startForeground() メソッドを 5 秒以内に呼び出して、その新しいサービスの通知をユーザーに表示します。
+  > アプリが startForeground() を制限時間内に呼び出さない場合、サービスが停止し、アプリが ANR になります。

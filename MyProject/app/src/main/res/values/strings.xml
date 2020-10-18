@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyProject</string>
+    <string name="service_name">My Service</string>
+    <string name="ticket_text">Ongoing…</string>
+    <string name="start">Start Service</string>
+    <string name="stop">Stop Service</string>
 </resources>
