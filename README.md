@@ -3,6 +3,7 @@
 #### References and Memos
 
 - Context とは…
+
   > Context とは、簡単に言うと、アプリケーションの親情報です。Activity は Context の子クラスとなります。
   > 　 API の中にはちょいちょいこの Context を必要とするものが存在します。
   > 　 Activity も Context なんだったら、this で良いじゃん！！とか思うかもしれませんが、
@@ -11,6 +12,8 @@
   > 　その点、getApplicationContext()で取得できる Context 情報は Activity のライフサイクルに依存せず、
   > 　アプリケーションとしての純粋な情報となるため、メモリリークの危険性を回避できます。
   > 　 Context を必要とする API には、可能な限り getApplicationContext()を渡すようにしましょう。
+
+- `Marshalling` or `Marshaling` is the process of transforming the memory representation of an object to a data format suitable for storage or transmission, and it is typically `used when data must be moved between different parts of a computer program or from one program to another`. Marshalling is `similar to serialization` and is used to communicate to remote objects with an object, in this case a serialized object. It `simplifies complex communication, using composite objects in order to communicate instead of primitives`. The inverse of marshalling is called `unmarshalling` (or `demarshalling`, similar to `deserialization`).
 
 #### UI の保持
 
@@ -245,6 +248,21 @@ WorkQuery workQuery = WorkQuery.Builder
 - [reference](https://akira-watson.com/android/service.html#4)
 
 - `IntentService`
+
   - ワークキューを使った順次処理を行える。ワークキューを使って要求されたタスクを一つづつ実行し、
-    全てが終わると自ら終了してくれる。(Service では 作業が終わっても stopSelf() や stopService() を呼び出して自身でサービスを停止しないと行けない場合がある)
+    全てが終わると自ら終了してくれる。(Service では 作業が終わっても `stopSelf()` や `stopService()` を呼び出して自身でサービスを停止しないと行けない場合がある)
   - 簡単に別スレッドを使うことができるのが IntentService
+
+- Communication b/w Activity and Service with `sendBroadcast(intent)` in Service and `onReceive(Context context, Intent intent)` in Activity
+  - [ref](https://www.vogella.com/tutorials/AndroidServices/article.html)
+
+#### WindowManager
+
+- [reference](https://akira-watson.com/android/windowmanager.html)
+
+#### ANR
+
+- ANR とはメインスレッド上で重たい処理を行った際に表示される警告で、ユーザーには「〜は応答していません」というダイアログとして表示されます。ここでいう重たい処理というのは具体的には以下の通りです。
+  - メインスレッド上で 5 秒以上かかる処理を実行する
+  - BroadcastReceiver が 10 秒以内で終了しない
+- [reference](http://yuyakaido.hatenablog.com/entry/2014/12/30/161157)
