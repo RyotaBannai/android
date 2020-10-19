@@ -254,7 +254,12 @@ WorkQuery workQuery = WorkQuery.Builder
   - 簡単に別スレッドを使うことができるのが IntentService
 
 - Communication b/w Activity and Service with `sendBroadcast(intent)` in Service and `onReceive(Context context, Intent intent)` in Activity
+
   - [ref](https://www.vogella.com/tutorials/AndroidServices/article.html)
+
+- リモート プロセスと通信するサービスが必要な場合は、`Messenger` を使用してサービスのインターフェースを提供できる。この方法では、AIDL を使用しなくても`プロセス間通信`（`IPC`）を実行できる。
+  - ほとんどのアプリにおいて、サービスはマルチスレッドを実行する必要がないため、Messenger を使用することで、`サービスが一度に 1 つの呼び出し`を処理できる。
+  - サービスのマルチスレッド化が重要である場合は、`AIDL` を使用してインターフェースを定義する。
 
 #### WindowManager
 
