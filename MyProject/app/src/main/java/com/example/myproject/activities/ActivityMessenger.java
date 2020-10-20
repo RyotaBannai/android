@@ -23,6 +23,7 @@ public class ActivityMessenger extends Activity implements View.OnClickListener 
     boolean bound;
     private static final String TAG = "ActivityMessenger";
 
+    // connection callback
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -33,6 +34,9 @@ public class ActivityMessenger extends Activity implements View.OnClickListener 
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            /**
+             * サービスがクラッシュしたり強制終了されたりした場合など、サービスへの接続が予期せず失われたときに、Android システムがこれを呼び出す.
+             */
             Log.d(TAG, "Connection failed");
             mService = null;
             bound = false;
@@ -61,6 +65,7 @@ public class ActivityMessenger extends Activity implements View.OnClickListener 
     protected void onStart() {
         super.onStart();
         bindService(new Intent(this, MessengerAsService.class), mConnection, Context.BIND_AUTO_CREATE);
+        // Context.BIND_AUTO_CREATE: サービスがまだ存在していない場合にはサービスを作成
     }
 
     @Override

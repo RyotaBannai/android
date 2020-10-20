@@ -60,4 +60,9 @@ public class MessengerAsService extends Service {
         mMessenger = new Messenger(new IncomingHandler(this));
         return mMessenger.getBinder();
     }
+
+//    @Override
+//    public boolean onUnbind(Intent intent) {
+//        return super.onUnbind(intent);
+//    }
 }

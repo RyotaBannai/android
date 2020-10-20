@@ -5,4 +5,7 @@
     <string name="start">Start Service</string>
     <string name="stop">Stop Service</string>
     <string name="test_worker">Test Worker</string>
+    <string name="remote_service_started">Remote service started</string>
+    <string name="remote_service_stopped">Remote service stopped</string>
+    <string name="local_service_label">Messenger Service</string>
 </resources>
