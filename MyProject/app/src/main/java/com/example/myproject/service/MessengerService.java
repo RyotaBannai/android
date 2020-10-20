@@ -33,9 +33,9 @@ public class MessengerService extends Service {
     int mValue = 0;
 
 
-    static final int MSG_REGISTER_CLIENT = 1;
-    static final int MSG_UNREGISTER_CLIENT = 2; // Command to the service to unregister a client, to stop receiving callbacks from the service.
-    static final int MSG_SET_VALUE = 3;
+    public static final int MSG_REGISTER_CLIENT = 1;
+    public static final int MSG_UNREGISTER_CLIENT = 2; // Command to the service to unregister a client, to stop receiving callbacks from the service.
+    public static final int MSG_SET_VALUE = 3;
 
     class IncomingHandler extends Handler {
         @Override
