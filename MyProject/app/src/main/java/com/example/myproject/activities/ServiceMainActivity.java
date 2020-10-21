@@ -1,7 +1,5 @@
 package com.example.myproject.activities;
 
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,7 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myproject.R;
-import com.example.myproject.service.MyService;
+import com.example.myproject.services.MyService;
 
 public class ServiceMainActivity extends AppCompatActivity {
     @Override

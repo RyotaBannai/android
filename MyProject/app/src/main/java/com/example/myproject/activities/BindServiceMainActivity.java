@@ -1,6 +1,5 @@
 package com.example.myproject.activities;
 
-import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myproject.R;
-import com.example.myproject.service.BindService;
-import com.example.myproject.service.BindService.LocalBinder;
+import com.example.myproject.services.BindService;
+import com.example.myproject.services.BindService.LocalBinder;
 
 public class BindServiceMainActivity extends AppCompatActivity {
     BindService mService;

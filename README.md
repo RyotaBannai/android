@@ -299,3 +299,21 @@ PreferenceManager#getDefaultSharedPreferences(Context) // PreferenceManager.getD
 | MODE_MULTI_PROCESS   | 複数のプロセスで読み書き可能 | API Level23 で非推奨 |
 
 - `apply()` は、すぐにメモリ内の `SharedPreferences` オブジェクトを変更するが、更新内容は`非同期`でディスクに書き込まれる。他方、`commit()` を使用すると、データを`同期的`にディスクに書き込むことができる。ただし、`commit()` は同期的であり、UI レンダリングを一時停止する可能性があるため、メインスレッドからは呼び出さないようにする。
+
+### AsyncTask
+
+- AsyncTask を使うと Thread や Runnable を意識することなく、 メインスレッドとは別のスレッドで処理を行うことができる。
+
+- `onPreExecute()`:`doInBackground`メソッドの実行前にメインスレッドで実行される
+  - 非同期処理前に何か処理を行いたい時などに使うことができる。
+
+-`doInBackground()`: メインスレッドとは別のスレッドで実行される
+　- 非同期で処理したい内容を記述。 このメソッドだけは必ず実装する必要がある。
+　- doInBackground メソッドから画面を操作しようとすると例外が発生する
+
+- `onProgressUpdate()`: メインスレッドで実行される
+
+  - 非同期処理の進行状況をプログレスバーで表示したい時などに使うことができる。
+
+- `onPostExecute()`: `doInBackground`メソッドの実行後にメインスレッドで実行される
+  - `doInBackground` メソッドの戻り値をこのメソッドの引数として受け取り、その結果を画面に反映させることができる

@@ -16,7 +16,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.example.myproject.R;
-import com.example.myproject.service.MessengerAsService;
+import com.example.myproject.services.MessengerAsService;
 
 public class ActivityMessenger extends Activity implements View.OnClickListener {
     Messenger mService = null;

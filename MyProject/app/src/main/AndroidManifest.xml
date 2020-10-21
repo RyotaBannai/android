@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.myproject.activities.SPMainActivity"
+            android:name="com.example.myproject.activities.AsyncTaskMainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,27 +19,27 @@
         </activity>
 
         <service
-            android:name=".service.MyService"
+            android:name=".services.MyService"
             android:icon="@drawable/ic_launcher_background"
             android:label="@string/service_name" />
 
         <service
-            android:name=".service.HelloIntentService"
+            android:name=".services.HelloIntentService"
             android:icon="@drawable/ic_launcher_background"
             android:label="@string/service_name" />
 
         <service
-            android:name=".service.BindService"
+            android:name=".services.BindService"
             android:icon="@drawable/ic_launcher_background"
             android:label="@string/service_name" />
 
         <service
-            android:name=".service.MessengerAsService"
+            android:name=".services.MessengerAsService"
             android:icon="@drawable/ic_launcher_background"
             android:label="@string/service_name" />
 
         <service
-            android:name=".service.MessengerService"
+            android:name=".services.MessengerService"
             android:icon="@drawable/ic_launcher_background"
             android:label="@string/service_name" />
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myproject.R;
-import com.example.myproject.viewModel.NameViewModel;
+import com.example.myproject.viewModels.NameViewModel;
 
 public class LivelyMainActivity extends AppCompatActivity implements View.OnClickListener{
     private final String TAG = getClass().getSimpleName();

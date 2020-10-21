@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">MyProject</string>
+    <string name="button">Button</string>
+    <string name="run_async_task">Run AsyncTask</string>
     <string name="service_name">My Service</string>
     <string name="ticket_text">Ongoing…</string>
     <string name="start">Start Service</string>

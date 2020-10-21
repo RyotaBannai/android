@@ -1,6 +1,5 @@
 package com.example.myproject.activities;
 
-import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myproject.R;
-import com.example.myproject.service.HelloIntentService;
+import com.example.myproject.services.HelloIntentService;
 
 public class IntentServiceActivity extends AppCompatActivity {
 

@@ -1,6 +1,5 @@
-package com.example.myproject.viewModel;
+package com.example.myproject.viewModels;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

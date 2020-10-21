@@ -13,8 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myproject.R;
-import com.example.myproject.viewModel.MergerViewModel;
-import com.example.myproject.viewModel.NameViewModel;
+import com.example.myproject.viewModels.MergerViewModel;
 
 public class MergerActivity extends AppCompatActivity implements View.OnClickListener{
     private final String TAG = getClass().getSimpleName();

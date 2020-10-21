@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.myproject.R;
-import com.example.myproject.service.MessengerService;
+import com.example.myproject.services.MessengerService;
 
 /**
  * reference: https://android.googlesource.com/platform/development/+/master/samples/ApiDemos/src/com/example/android/apis/app/MessengerServiceActivities.java
