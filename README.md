@@ -271,3 +271,31 @@ WorkQuery workQuery = WorkQuery.Builder
   - メインスレッド上で 5 秒以上かかる処理を実行する
   - BroadcastReceiver が 10 秒以内で終了しない
 - [reference](http://yuyakaido.hatenablog.com/entry/2014/12/30/161157)
+
+### SharedPreference (共有環境設定)
+
+- インスタンスの取得方法
+
+```java
+Context#getPreferences(int) // getPreferences(Context.MODE_PRIVATE); // Activity 専用のSP. モードを引数として渡す
+Context#getSharedPreferences(String, int) // getSharedPreferences("SaveData", Context.MODE_PRIVATE); // 名前で識別される複数の共有環境設定ファイルが必要な場合. 引数で保存データの名前とモードを渡す
+PreferenceManager#getDefaultSharedPreferences(Context) // PreferenceManager.getDefaultSharedPreferences(getApplicationContext()); // getDefaultSharedPreferences で取得したときのモードはデフォルトで MODE_PRIVATE
+```
+
+- ファイルパス: `/data/data/[パッケージ名]/shared_prefs/`
+- ファイル名:
+
+  - getPreferences(int)で作成した場合: `[Activityのクラス名].xml`
+  - getSharedPreferences("SaveData", int)で作成した場合: `SaveData.xml`
+  - getDefaultSharedPreferences(Context)で作成した場合: `[パッケージ名]_preferences.xml`
+
+- 保存したデータのモードについて
+
+| モード名             | 効果                         | 備考                 |
+| -------------------- | ---------------------------- | -------------------- |
+| MODE_PRIVATE         | 自アプリのみ読み書き可能     |                      |
+| MODE_WORLD_READABLE  | 他アプリから読み取り可能     | API Level17 で非推奨 |
+| MODE_WORLD_WRITEABLE | 他アプリから書き込み可能     | API Level17 で非推奨 |
+| MODE_MULTI_PROCESS   | 複数のプロセスで読み書き可能 | API Level23 で非推奨 |
+
+- `apply()` は、すぐにメモリ内の `SharedPreferences` オブジェクトを変更するが、更新内容は`非同期`でディスクに書き込まれる。他方、`commit()` を使用すると、データを`同期的`にディスクに書き込むことができる。ただし、`commit()` は同期的であり、UI レンダリングを一時停止する可能性があるため、メインスレッドからは呼び出さないようにする。
