@@ -4,10 +4,16 @@
     <string name="ticket_text">Ongoing…</string>
     <string name="start">Start Service</string>
     <string name="stop">Stop Service</string>
+    <string name="sendMsg">Send Message</string>
     <string name="test_worker">Test Worker</string>
+    <string name="service_binding">Binding.</string>
+    <string name="service_unbinding">Unbinding.</string>
     <string name="remote_service_started">Remote service started</string>
     <string name="remote_service_stopped">Remote service stopped</string>
     <string name="local_service_label">Messenger Service</string>
-    <string name="remote_service_connected">>Remote service connected</string>
-    <string name="remote_service_disconnected">>Remote service disconnected</string>
+    <string name="remote_service_connected">Remote service connected</string>
+    <string name="remote_service_disconnected">Remote service disconnected</string>
+    <string name="service_not_attached">Not attached.</string>
+    <string name="service_attached">Attached.</string>
+    <string name="service_detached">Detached.</string>
 </resources>

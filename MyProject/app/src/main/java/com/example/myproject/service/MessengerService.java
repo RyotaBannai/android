@@ -10,12 +10,14 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.myproject.R;
+import com.example.myproject.activities.MessengerServiceActivities;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,7 @@ import java.util.ArrayList;
  */
 
 public class MessengerService extends Service {
+    static final String TAG = "MessengerService";
 
     // For showing and hiding our notification
     NotificationManager mNM;
@@ -40,6 +43,7 @@ public class MessengerService extends Service {
     class IncomingHandler extends Handler {
         @Override
         public void handleMessage(@NonNull Message msg) {
+            Log.d(TAG, "Handling message.");
             switch (msg.what) {
                 case MSG_REGISTER_CLIENT:
                     mClients.add(msg.replyTo);
@@ -49,10 +53,11 @@ public class MessengerService extends Service {
                     break;
                 case MSG_SET_VALUE:
                     mValue = msg.arg1;
-                    for (int i = mClients.size(); i > 0; i--) {
+                    for (int i = mClients.size() - 1; i >= 0; i--) {
                         try {
                             mClients.get(i).send(Message.obtain(null, MSG_SET_VALUE, mValue, 0));
                         } catch (RemoteException e) {
+
                             mClients.remove(i);
                         }
                     }
@@ -86,10 +91,10 @@ public class MessengerService extends Service {
     private void showNotification() {
         CharSequence text = getText(R.string.remote_service_started);
         PendingIntent contentIntent = PendingIntent.getActivity(
-                this, 0, new Intent(this, Controller.this), 0); // TODO: replace Activity with another.
+                this, 0, new Intent(this, MessengerServiceActivities.Binding.class), 0);
 
         Notification notification = new Notification.Builder(this)
-//                .setSmallIcon(R.drawable.stat_sample)  // the status icon
+                .setSmallIcon(android.R.drawable.star_on)  // the status icon
                 .setTicker(text)  // the status text
                 .setWhen(System.currentTimeMillis())  // the time stamp
                 .setContentTitle(getText(R.string.local_service_label))  // the label of the entry
