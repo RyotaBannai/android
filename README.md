@@ -304,7 +304,7 @@ PreferenceManager#getDefaultSharedPreferences(Context) // PreferenceManager.getD
 
 - AsyncTask を使うと Thread や Runnable を意識することなく、 メインスレッドとは別のスレッドで処理を行うことができる。
 
-- `onPreExecute()`:`doInBackground`メソッドの実行前にメインスレッドで実行される
+- `onPreExecute()`: `doInBackground`メソッドの実行前にメインスレッドで実行される
   - 非同期処理前に何か処理を行いたい時などに使うことができる。
 
 -`doInBackground()`: メインスレッドとは別のスレッドで実行される
@@ -317,3 +317,11 @@ PreferenceManager#getDefaultSharedPreferences(Context) // PreferenceManager.getD
 
 - `onPostExecute()`: `doInBackground`メソッドの実行後にメインスレッドで実行される
   - `doInBackground` メソッドの戻り値をこのメソッドの引数として受け取り、その結果を画面に反映させることができる
+
+#### Background Task
+
+- 一般に、数ミリ秒以上かかるタスクはすべて、`バックグラウンド スレッド`に委任する必要がある。長時間実行される一般的なタスクは、`ビットマップのデコー`ド、`ストレージへのアクセス`、`機械学習（ML）モデルの操作`、ネ`ットワークへのリクエスト`など。
+- 即時タスク: ユーザーがアプリをバックグラウンドに移行したり、デバイスが再起動したりしても、直ちに実行して処理を続行する必要があるタスクの場合、WorkManager とその長時間実行タスクのサポートを使用
+- 遅延タスク: ユーザー操作に直接つながっておらず、今後いつでも実行できるタスクはすべて延期できる。延期タスクの場合におすすめのソリューションは `WorkManager`。WorkManager を使用すると、`アプリが終了した場合`や`デバイスが再起動した場合`でも、実行する予定の延期可能な非同期タスクのスケジュールを簡単に設定できる
+- 定時タスク: 正確な時間どおりに実行する必要があるタスクには、`AlarmManager` を使用
+- Executor のいる java.util.concurrent パッケージは Java 1.5 から追加されたパッケージであり、Thread や Runnable、synchronize / wait / notify だけでどうにかするにはあまりにも辛かったマルチスレッド処理を簡便化するためのオブジェクトが集められている。
