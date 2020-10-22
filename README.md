@@ -329,3 +329,11 @@ PreferenceManager#getDefaultSharedPreferences(Context) // PreferenceManager.getD
 #### Okhttp
 
 - Interceptor rewriting request and response: https://square.github.io/okhttp/interceptors/#rewriting-requests
+
+#### Local Broadcast
+
+- プロセス状態への影響:
+  - プロセスがレシーバーを実行する（コードが `onReceive()` メソッドで実行中である）場合は、`フォアグラウンド プロセス`とみなされ、メモリに対して過度の負荷が発生している場合を除き、システムがプロセスの実行を継続
+  - `onReceive()` からコードが返されると、`ブロードキャスト レシーバーがアクティブではなくなり`、レシーバーのホストプロセスの重要度が、内部で実行されているアプリの他のコンポーネントと同程度になります。このホストプロセスがマニフェストで宣言されたレシーバーのみをホストしている場合（`ユーザーが一度もアプリを操作していないか直近の操作がない場合が考えられます`）、`onReceive()` からコードが返されると、システムは対象のプロセスを優先度の低いプロセスとみなし、重要度の高い他のプロセスでリソースを利用できるようにするため、このプロセスを強制終了する可能性がある。
+  - `ブロードキャスト レシーバー`から`実行時間の長いバックグラウンド スレッドを開始しないようにする必要がある`。こうするには、`goAsync()` を呼び出す（`バックグラウンド スレッド`で`ブロードキャストを処理`するために、さらに若干の時間が必要な場合）か、`JobScheduler` を使用してレシーバーの `JobService` のスケジュール設定を行い、`プロセスの実行作業が引き続きアクティブであることをシステムが認識できるようにする`
+  - [reference](https://developer.android.com/guide/components/broadcasts?hl=ja#effects-process-state)
