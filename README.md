@@ -325,3 +325,7 @@ PreferenceManager#getDefaultSharedPreferences(Context) // PreferenceManager.getD
 - 遅延タスク: ユーザー操作に直接つながっておらず、今後いつでも実行できるタスクはすべて延期できる。延期タスクの場合におすすめのソリューションは `WorkManager`。WorkManager を使用すると、`アプリが終了した場合`や`デバイスが再起動した場合`でも、実行する予定の延期可能な非同期タスクのスケジュールを簡単に設定できる
 - 定時タスク: 正確な時間どおりに実行する必要があるタスクには、`AlarmManager` を使用
 - Executor のいる java.util.concurrent パッケージは Java 1.5 から追加されたパッケージであり、Thread や Runnable、synchronize / wait / notify だけでどうにかするにはあまりにも辛かったマルチスレッド処理を簡便化するためのオブジェクトが集められている。
+
+#### Okhttp
+
+- Interceptor rewriting request and response: https://square.github.io/okhttp/interceptors/#rewriting-requests

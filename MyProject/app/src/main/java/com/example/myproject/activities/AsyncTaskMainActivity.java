@@ -16,7 +16,6 @@ public class AsyncTaskMainActivity extends ComponentActivity {
     private TextView textView;
     private Button button;
     private Button countButton;
-    private MyAsyncTask task;
     private Integer count = 0;
 
     @Override
@@ -28,12 +27,11 @@ public class AsyncTaskMainActivity extends ComponentActivity {
         button = (Button) findViewById(R.id.button);
         countButton = (Button) findViewById(R.id.countButton);
 
-        task = new MyAsyncTask(textView, button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.setEnabled(false);
-                task.execute(1);
+                (new MyAsyncTask(textView, button)).execute(count);
             }
         });
 

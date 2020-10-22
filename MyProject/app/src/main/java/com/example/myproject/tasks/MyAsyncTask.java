@@ -40,7 +40,7 @@ public class MyAsyncTask extends AsyncTask<Integer, Integer, Integer> {
         } catch (InterruptedException e) {
         }
         Log.d(TAG, String.valueOf(value));
-        return value[0] + 1;
+        return value[0];
     }
 
     @Override
