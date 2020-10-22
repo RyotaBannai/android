@@ -31,7 +31,7 @@ public class ExecutorMainActivity extends ComponentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        myApplication = (MyApplication) this.getApplicationContext();
+//        myApplication = (MyApplication) this.getApplicationContext();
 //        myApplication.executorService
 //        myApplication.mainThreadHandler
 

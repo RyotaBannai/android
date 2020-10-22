@@ -17,6 +17,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * okhttp ref:
@@ -32,7 +33,9 @@ public class PokemonRepository {
     private Gson gson = new Gson();
 
     public PokemonRepository(Executor executor) {
-        this.client = new OkHttpClient();
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        this.client = new OkHttpClient.Builder().addInterceptor(logging).build();
         this.executor = executor;
     }
 
