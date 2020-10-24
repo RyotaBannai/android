@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.myproject.activities.LocalBroadcastActivity"
+            android:name="com.example.myproject.activities.TestAlarmActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,6 +51,14 @@
             android:icon="@drawable/ic_launcher_background"
             android:label="@string/service_name">
         </service>
+
+        <!--アプリで明示的にレシーバを有効にしない限り、レシーバは呼び出されない。
+        このため、起動レシーバが不必要に呼び出されるのを防ぐことができる。-->
+        <receiver android:name=".receivers.BootReceiver" android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 
