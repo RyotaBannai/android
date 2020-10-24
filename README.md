@@ -479,3 +479,5 @@ public class MyIntentService extends IntentService {
 > Looper で言及したように Android のスレッドは Java のスレッドを使用するため Android で導入した Looper を持っていないという不便さがあります。このような不便さを改善するために、生成時に Looper を自動的に持つクラスを提供しています。これがまさに HandlerThread です。 HandlerThread は一般的なスレッドを拡張したクラスで、内部に繰り返しループする Looper を持っています。自動的に Looper 内部の Message Queue も生成されるためこれを利用してスレッドに Message や Runnable を渡すことができます
 
 - [Reference - Android のバックグラウンドを使いこなす Thread, Looper, Handler](https://academy.realm.io/jp/posts/android-thread-looper-handler/)
+- [How to safety interrupt Thread](https://www.baeldung.com/java-thread-stop)
+- [HanlderとMessageを使ってマルチスレッドの処理結果を受け取る - Thread を作って mainLooper に結果を post する](https://phicdy.hatenablog.com/entry/2014/09/02/220457)
