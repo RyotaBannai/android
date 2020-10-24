@@ -337,3 +337,77 @@ PreferenceManager#getDefaultSharedPreferences(Context) // PreferenceManager.getD
   - `onReceive()` からコードが返されると、`ブロードキャスト レシーバーがアクティブではなくなり`、レシーバーのホストプロセスの重要度が、内部で実行されているアプリの他のコンポーネントと同程度になります。このホストプロセスがマニフェストで宣言されたレシーバーのみをホストしている場合（`ユーザーが一度もアプリを操作していないか直近の操作がない場合が考えられます`）、`onReceive()` からコードが返されると、システムは対象のプロセスを優先度の低いプロセスとみなし、重要度の高い他のプロセスでリソースを利用できるようにするため、このプロセスを強制終了する可能性がある。
   - `ブロードキャスト レシーバー`から`実行時間の長いバックグラウンド スレッドを開始しないようにする必要がある`。こうするには、`goAsync()` を呼び出す（`バックグラウンド スレッド`で`ブロードキャストを処理`するために、さらに若干の時間が必要な場合）か、`JobScheduler` を使用してレシーバーの `JobService` のスケジュール設定を行い、`プロセスの実行作業が引き続きアクティブであることをシステムが認識できるようにする`
   - [reference](https://developer.android.com/guide/components/broadcasts?hl=ja#effects-process-state)
+
+### デバイスの起動状態を管理する
+
+- 電池の消耗を防ぐため、一定時間アイドル状態になった Android デバイスはすぐにスリープ状態となる。（CUP の）スリープ状態になると http ダウンロードなどアプリの実行が停止してしまうので、画面をオンにする（CUP がアクティブ状態）か、wake lock を使って、画面はオフだけどバックグラウンドで CUP が動いて処理を実行する、というようなことが必要になる。
+
+- 画面をオンのままにする：
+
+1. アクティビティで `FLAG_KEEP_SCREEN_ON` を使用する
+   - `wake lock` とは異なり、`特別な権限が不要`で、アプリ間を移動するユーザーをプラットフォームが適切に管理する。`使用されていないリリースの解放をアプリで行う必要はない`。
+
+```java
+public class MainActivity extends Activity {
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // here
+      }
+    }
+```
+
+2. アプリのレイアウト XML ファイルで `android:keepScreenOn` 属性を使用する方法
+
+```java
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:keepScreenOn="true"> // here // activity で FLAG_KEEP_SCREEN_ON する場合と同じ
+        ...
+    </RelativeLayout>
+```
+
+- `デバイスがスリープ状態になる前に処理を完了させるために CPU を動作させ続ける必要がある場合`は、`wake lock` と呼ばれる `PowerManager` のシステム サービス機能を使用。`wake lock` を使用すると、ホストデバイスの電力状態をアプリで管理できる。
+  - ホストデバイスの電池寿命に大きな影響を及ぼすことがあるため、wake lock は厳密に必要な場合のみ使用.
+  - `wake lock` を使用するのに適したケースの 1 つとして`バックグラウンド サービス`がある。バックグラウンド サービスでは、`wake lock` を取得して CPU を動作させ続け、`画面がオフになっている間`に処理を行う必要がある。
+  - Best practice は `WakefulBroadcastReceiver` (この方法でアプリ用の `PARTIAL_WAKE_LOCK` の作成と管理を行う) を介して wake lock を管理すること。
+    - `Broadcast` に対して時間がかかる処理を投げるようにして、その中から `startWakefulService`を読んで`partial wake lock` 状態を作る.（下のスニペットを参考）
+  - wake lock を開放するには `wakelock.release()` を呼ぶ。
+
+```java
+// 純粋な wake lock
+PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+  WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+          "MyApp::MyWakelockTag");
+  wakeLock.acquire();
+```
+
+```java
+// partial wake lock
+ public class MyWakefulReceiver extends WakefulBroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        // Start the service, keeping the device awake while the service is
+        // launching. This is the Intent to deliver to the service.
+        Intent service = new Intent(context, MyIntentService.class);
+        startWakefulService(context, service); // ここで IntentService に処理を投げてしまう
+    }
+}
+...
+public class MyIntentService extends IntentService {
+    public static final int NOTIFICATION_ID = 1;
+    private NotificationManager notificationManager;
+    NotificationCompat.Builder builder;
+    public MyIntentService() {
+        super("MyIntentService");
+    }
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        Bundle extras = intent.getExtras();
+        // Do the work that requires your app to keep the CPU running.
+        // ...
+        // Release the wake lock provided by the WakefulBroadcastReceiver.
+        MyWakefulReceiver.completeWakefulIntent(intent); // サービスの終了時に MyWakefulReceiver.completeWakefulIntent() が呼び出され、wake lock を解放
+    }
+    }
+```
